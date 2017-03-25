@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>XrmUtils.CrmSdk.Extensions</id>
+        <version>1.0.1.0</version>
+        <title>Extenion methods for the Organization Service, Entity and other Microsoft Dynamics CRM SDK components.</title>
+        <authors>Emerson Brito</authors>
+        <owners>Emerson Brito</owners>
+        <licenseUrl>https://github.com/emerbrito/XrmUtils-Extensions/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/emerbrito/XrmUtils-Extensions</projectUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>Contains extension methods for different components of the Microsoft Dynamics CRM SDK. Also a set of wrappers and utilities created around the Organization Service Context, metadata and more.</description>
+        <summary>Extenion methods for the Organization Service, Entity and other Microsoft Dynamics CRM SDK components.</summary>
+        <copyright>Emerson Brito (c) 2016</copyright>
+        <tags>dynamics crm 365 sdk xrm extensions</tags>
+    </metadata>
+    <files>
+        <file src="..\src\XrmUtils.Extensions\bin\Release\XrmUtils.Extensions.dll" target="lib\net452\XrmUtils.Extensions.dll" />
+        <file src="..\src\XrmUtils.Extensions\bin\Release\XrmUtils.Extensions.pdb" target="lib\net452\XrmUtils.Extensions.pdb" />
+        <file src="..\src\XrmUtils.Extensions\bin\Release\XrmUtils.Extensions.xml" target="lib\net452\XrmUtils.Extensions.xml" />
+    </files>
+</package>
