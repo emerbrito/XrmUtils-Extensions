@@ -2,6 +2,7 @@ Dynamics CRM SDK Extensions
 ===========================
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ue0akrlpfw8m5y9a?svg=true)](https://ci.appveyor.com/project/emerbrito/xrmutils-extensions)
+[![NuGet](https://img.shields.io/nuget/v/XrmUtils.CrmSdk.Extensions.svg)](https://www.nuget.org/packages/XrmUtils.CrmSdk.Extensions)
 
 This project contains a set of extension methods for different components of the Microsoft Dynamics CRM SDK. Also a set of wrappers and utilities created around the Organization Service Context, metadata and more. 
 
