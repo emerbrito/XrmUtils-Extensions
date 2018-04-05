@@ -167,7 +167,7 @@ namespace XrmUtils.Extensions
 
             var aliasedValue = entity.GetAttributeValue<AliasedValue>(attributeLogicalName, image);
 
-            if(aliasedValue == null)
+            if(aliasedValue == null || aliasedValue.Value == null)
             {
                 if(defaultValue == null)
                 {
