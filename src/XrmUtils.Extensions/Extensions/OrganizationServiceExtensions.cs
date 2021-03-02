@@ -743,6 +743,29 @@ namespace XrmUtils.Extensions
         }
 
         /// <summary>
+        /// Forces an update/refresh of a rollup field.
+        /// </summary>
+        /// <param name="instance">An instance of the <see cref="IOrganizationService"/>.</param>
+        /// <param name="entityRef">Target entity reference.</param>
+        /// <param name="fieldName">Rollup field name.</param>
+        public static void UpdateRollupField(this IOrganizationService instance, EntityReference entityRef, string fieldName)
+        {
+
+            var req = new CalculateRollupFieldRequest
+            {
+                Target = entityRef,
+                FieldName = fieldName
+            };
+
+            var resp = (CalculateRollupFieldResponse)instance.Execute(req);
+
+            if (resp == null || resp.Entity == null)
+            {
+                throw new InvalidPluginExecutionException($"Unable to update rollup field {fieldName}");
+            }
+        }
+
+        /// <summary>
         /// Creates a new record or update it if record already exists.
         /// </summary>
         /// <param name="orgSvc"></param>
