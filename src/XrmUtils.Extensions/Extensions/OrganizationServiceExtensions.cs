@@ -511,6 +511,53 @@ namespace XrmUtils.Extensions
         }
 
         /// <summary>
+        /// Determine whether user has a given privelege on a particular entity.
+        /// </summary>
+        /// <param name="instance">An instance of the <see cref="IOrganizationService"/>.</param>
+        /// <param name="userId">The user id.</param>
+        /// <param name="privilegeType">Privilege type.</param>
+        /// <param name="entityLogicalName">Entity logical name.</param>
+        /// <returns></returns>
+        public static bool HasPrivilege(this IOrganizationService instance, Guid userId, PrivilegeType privilegeType, string entityLogicalName)
+        {
+
+            bool hasPrivilege = false;
+            string prvName = $"prv{Enum.GetName(typeof(PrivilegeType), privilegeType)}{entityLogicalName}";
+
+            var privilegeQuery = new QueryExpression("privilege")
+            {
+                ColumnSet = new ColumnSet(true)
+            };
+
+
+            var privilegeLink1 = new LinkEntity("privilege", "roleprivileges", "privilegeid", "privilegeid", JoinOperator.Inner);
+            var privilegeLink2 = new LinkEntity("roleprivileges", "role", "roleid", "roleid", JoinOperator.Inner);
+            var privilegeLink3 = new LinkEntity("role", "systemuserroles", "roleid", "roleid", JoinOperator.Inner);
+            var privilegeLink4 = new LinkEntity("systemuserroles", "systemuser", "systemuserid", "systemuserid", JoinOperator.Inner);
+
+            var userCondition = new ConditionExpression("systemuserid", ConditionOperator.Equal, userId);
+            var privilegeCondition = new ConditionExpression("name", ConditionOperator.Equal, prvName); // name of the privilege
+
+            privilegeLink4.LinkCriteria.AddCondition(userCondition);
+            FilterExpression privilegeFilter = new FilterExpression(LogicalOperator.And);
+            privilegeFilter.Conditions.Add(privilegeCondition);
+            privilegeQuery.Criteria = privilegeFilter;
+
+            privilegeLink3.LinkEntities.Add(privilegeLink4);
+            privilegeLink2.LinkEntities.Add(privilegeLink3);
+            privilegeLink1.LinkEntities.Add(privilegeLink2);
+            privilegeQuery.LinkEntities.Add(privilegeLink1);
+
+            var resp = instance.RetrieveMultiple(privilegeQuery);
+            if (resp.Entities.Count > 0)
+            {
+                hasPrivilege = true;
+            }
+
+            return hasPrivilege;
+        }
+
+        /// <summary>
         /// Retrieves a record.
         /// </summary>
         /// <param name="orgSvc">An instance of the <see cref="IOrganizationService"/>.</param>
