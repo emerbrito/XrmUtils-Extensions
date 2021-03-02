@@ -227,6 +227,31 @@ namespace XrmUtils.Extensions
         }
 
         /// <summary>
+        /// Get all custom attributes of an entity.
+        /// </summary>
+        /// <param name="instance">An instance of the <see cref="IOrganizationService"/>.</param>
+        /// <param name="entityname">Entity name</param>
+        /// <param name="addPrimaryId">Whether the primary ID attribute is also returned as part of the collection. Detault to false.</param>
+        /// <returns></returns>
+        public static IEnumerable<AttributeMetadata> GetCustomAttributes(this IOrganizationService instance, string entityname, bool addPrimaryId = false)
+        {
+            var service = new MetadataService(instance);
+            var emetadata = service.GetEntityMetadata(entityname, EntityFilters.Attributes);
+            var ametadata = emetadata.Attributes
+                .Where(m => (m.IsCustomAttribute.HasValue && m.IsCustomAttribute.Value))
+                .ToList();
+
+            if (!addPrimaryId)
+            {
+                ametadata = ametadata
+                    .Where(a => !a.IsPrimaryId.HasValue || a.IsPrimaryId.Value == false)
+                    .ToList();
+            }
+
+            return ametadata;
+        }
+
+        /// <summary>
         /// Uses a <see cref="Relationship"/> to identify the logical name of a entity in a relationship.
         /// </summary>
         /// <param name="orgSvc">An instance of the <see cref="IOrganizationService"/>.</param>
