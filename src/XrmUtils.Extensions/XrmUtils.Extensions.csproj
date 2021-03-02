@@ -91,6 +91,7 @@
     <Compile Include="Services\Plugins\PluginStep.cs" />
     <Compile Include="Services\Plugins\PluginType.cs" />
     <Compile Include="Services\Users\MembershipService.cs" />
+    <Compile Include="Services\Users\TimeZoneService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
