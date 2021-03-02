@@ -3,7 +3,7 @@
     <metadata>
         <id>XrmUtils.CrmSdk.Extensions</id>
         <version>1.0.1.0</version>
-        <title>Extension methods for Dynamics 365 SDK components inlcuding the OrganizationService and Entity objects.</title>
+        <title>Extension methods for Dynamics 365 SDK components inlcuding the Entity and OrganizationService.</title>
         <authors>Emerson Brito</authors>
         <owners>Emerson Brito</owners>
         <licenseUrl>https://github.com/emerbrito/XrmUtils-Extensions/blob/master/LICENSE</licenseUrl>
